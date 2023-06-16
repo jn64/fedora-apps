@@ -13,6 +13,27 @@
                 width: 100px;
                 height: 100px;
             }
+            .app-wrapper {
+                position: relative;
+            }
+
+            .app-btn-overlay {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                text-align: center;
+            }
+
+            .a2pp-btn-overlay:before {
+                content: ' ';
+                display: block;
+                /* adjust 'height' to position overlay content vertically */
+                height: 100%;
+                width: 100%;
+            }
+
         </style>
 	</head>
 	<body>
@@ -78,58 +99,13 @@
 				 </div>
 			</div>
 		</footer>
-		<script src="theme/fedora-bootstrap.min.js"></script>
+        <div id="app-modals"></div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+		<!-- <script src="theme/fedora-bootstrap.min.js"></script> -->
         <script src="theme/js-yaml.min.js"></script>
-        <script>
-            yamlUrl = "apps.yaml"
+        <script src="app.js"></script>
 
-            function computeMd5Hash(inputString) {
-                return inputString;
-            }
-            function stripHtmlTags(input) {
-                var doc = new DOMParser().parseFromString(input, 'text/html');
-                return doc.body.textContent || '';
-            }
-
-            function generateHtmlFromYaml(yamlString) {
-            const data = jsyaml.load(yamlString);
-            let html = '<div id="apps" class="row">\n';
-
-            for (const childCat of data.children) {
-                for (const child of childCat.children) {
-                const appDescription = stripHtmlTags(child.data.description);
-                const appTitle = child.name;
-                const appUrl = child.data.url;
-                const altIcon = computeMd5Hash(appUrl);
-                const appIcon = child.data.icon
-                    ? `theme/icons/${child.data.icon}`
-                    : `theme/icons/none.png`;
-
-                html += `    <div class="col-md-2 col-4 my-3  px-2 text-center" title="${appDescription}">\n`;
-                html += `       <a target="_blank" href="${appUrl}">\n`;
-                html += `       <img src="${appIcon}" class="img-thumbnail" alt="Logo for ${appTitle}"><br/>\n`;
-                html += `       ${appTitle}\n`;
-                html += '       </a>\n';
-                html += '    </div>\n';
-                }
-            }
-
-            html += '\n</div>';
-
-            return html;
-
-            }
-            
-            fetch(yamlUrl)
-            .then(response => response.text())
-            .then(yamlContent => {
-                const htmlOutput = generateHtmlFromYaml(yamlContent);
-                document.getElementById('app-body').innerHTML = htmlOutput;
-            })
-            .catch(error => {
-                console.error('Error fetching YAML file:', error);
-            });
-
-        </script>
 	</body>
 </html>
