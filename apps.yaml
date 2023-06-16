@@ -11,6 +11,7 @@ data:
         it all.  Explore!
 children:
 -   name:   Accounts
+    slug:   Accounts
     data:
         description: >
             Tools for everybody -- use these things to manage your Fedora
@@ -626,6 +627,7 @@ children:
                 Shows the health of our proxies.  How many bytes?
                 Concurrent sessions?  Health checks?
 -   name:   In Development
+    slug:   InDevelopment
     data:
         description: >
             These are the apps that we're working on, but that aren't quite

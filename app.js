@@ -1,4 +1,3 @@
-yamlUrl = "apps.yaml"
 
 function stripHtmlTags(input) {
     var doc = new DOMParser().parseFromString(input, 'text/html');
@@ -68,6 +67,8 @@ function generateTiles(apps) {
     let html = '<div id="apps" class="row">\n';
     a = 0;
     for (const childCat of data.children) {
+        const cat = childCat.name
+        const slug = childCat.slug ? childCat.slug : childCat.name;
         for (const child of childCat.children) {
             a++;
             const appDescription = stripHtmlTags(child.data.description);
@@ -78,7 +79,7 @@ function generateTiles(apps) {
                 : `theme/icons/none.png`;
 
             html += `    
-            <div class="col-md-2 col-4 my-3 px-2 text-center" title="${appDescription}">\n
+            <div id="apptile" class="cat-${slug} col-md-2 col-4 my-3 px-2 text-center" title="${appDescription}">\n
                 <a target="_blank" href="${appUrl}">\n
                     <img src="${appIcon}" class="img-thumbnail" alt="Logo for ${appTitle}"><br/>\n
                     ${appTitle}\n
@@ -95,6 +96,54 @@ function generateTiles(apps) {
     return html;
 
 }
+function buildPills(apps) {
+    const data = apps;
+    let html = '<li class="nav-item active px-1"><a class="nav-link active" data-filter="all">All</a></li>';
+    for (const childCat of data.children) {
+        const cat = childCat.name
+        const slug = childCat.slug ? childCat.slug : childCat.name;
+        html += `<li class="nav-item px-1"><a class="nav-link" data-filter="cat-${slug}">${cat}</a></li>`;
+    }
+    return html;
+}
+
+
+function filterPills() {
+
+    // Retrieve necessary elements from the DOM
+    const pills = document.querySelectorAll('#filter-container .nav-link');
+    const divList = document.getElementById('apps');
+
+    // Attach click event listener to each pill
+    pills.forEach(pill => {
+    pill.addEventListener('click', function() {
+        const filter = this.getAttribute('data-filter'); // Get the filter category
+
+        // Remove 'active' class from all pills
+        pills.forEach(p => p.classList.remove('active'));
+
+        // Add 'active' class to the clicked pill
+        this.classList.add('active');
+
+        // Filter the div list based on the selected category
+        if (filter === 'all') {
+        // Show all divs if 'All' is selected
+        divList.querySelectorAll('#apptile').forEach(div => div.style.display = 'block');
+        } else {
+        // Show only divs that match the selected category
+        divList.querySelectorAll('#apptile').forEach(div => {
+            if (div.classList.contains(filter)) {
+            div.style.display = 'block'; // Display matching divs
+            } else {
+            div.style.display = 'none'; // Hide non-matching divs
+            }
+        });
+        }
+    });
+    });
+
+}
+function setup(yamlUrl) {
 fetch(yamlUrl)
     .then(response => response.text())
     .then(yamlContent => {
@@ -103,8 +152,12 @@ fetch(yamlUrl)
         document.getElementById('app-body').innerHTML = htmlOutput;
         const htmlModels = generateModals(apps);
         document.getElementById('app-modals').innerHTML = htmlModels;
+        const htmlPills = buildPills(apps);
+        document.getElementById('pill-cat').innerHTML = htmlPills;
+        filterPills();
     })
     .catch(error => {
         console.error('Error fetching YAML file:', error);
     });
-
+}
+    

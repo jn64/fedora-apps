@@ -42,12 +42,21 @@
 				<a class="navbar-brand" href="/"><img src="theme/apps-logo.png" alt="Fedora" class="img-fluid" style="max-height: 40px;"></a>
 			</div>
 		</nav>
-		<div class="container pt-5 pb-5">
+		<div class="container pt-3 pb-5">
 				<div class="row">
 					<div class="col">
 						<div>
+                            <div id="filter-container">
+                                <ul id="pill-cat" class="nav nav-pills">
+                                  <li class="nav-item">
+                                    <a class="nav-link active" data-filter="all">All</a>
+                                  </li>
+                                </ul>
+                            </div>
                             <!-- START APPS -->
-                            <div id="app-body"></div>
+                            <div id="div-list">
+                                <div id="app-body"></div>
+                            </div>
                             <!-- END APPS -->
 						</div>
 					</div>
@@ -103,6 +112,9 @@
 		<script src="theme/fedora-bootstrap.min.js"></script>
         <script src="theme/js-yaml.min.js"></script>
         <script src="app.js"></script>
+        <script>
+            setup("apps.yaml");
+        </script>
 
 	</body>
 </html>
