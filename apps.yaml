@@ -80,6 +80,7 @@ children:
             of content that Fedora authors produce.  Blog posts, the wiki, and
             more..
     children:
+    
     -   name:   Ask Fedora
         data:
             icon:   ask_fedora.png
@@ -92,6 +93,19 @@ children:
             status_mappings: ['ask']
             description: >
                 Any question at all about Fedora?  Ask it here.
+    -   name:   Fedora Podcast
+        data:
+            url:    https://fedoraproject.fireside.fm
+            description: >
+                This Podcast will feature interviews and talks with the people who 
+                make the Fedora community awesome. These folks work on new technologies 
+                found in Fedora, or they produce the distro itself. Some work on putting 
+                Fedora in the hands of users. There is so much going on in Fedora; it takes 
+                a whole podcast series. Fedora Podcast is a proud member of the Tux Digital 
+                Network!
+    -   name:   Fedora Start
+        data:
+            url:    https://start.fedoraproject.org
     -   name:   The Wiki
         data:
             icon:   mediawiki.png
@@ -121,6 +135,7 @@ children:
                 Fedora Weekly News.)
     -   name:   The Planet
         data:
+            legacyApp: true
             icon:   planet_logo.png
             url:    http://fedoraplanet.org
             docs_url:   https://www.intertwingly.net/code/venus/
@@ -170,6 +185,19 @@ children:
                 Reporting Tool). It makes it easy to see what problems
                 users are hitting the most, and allows you to filter them
                 by Fedora release, associate, or component.
+    -   name:   Packager Dashboard
+        data:
+            url:    https://packager-dashboard.fedoraproject.org
+            icon:   package-sources.png
+            description: >
+                Packager Dashboard is a service for Fedora package maintainers 
+                aiming to provide all relevant data: FTBFS/FTI status (from both 
+                Bugzilla, Koschei and health check), orphan warnings, bugzillas, 
+                pull requests, active overrides and updates - at a single place 
+                in an easy to read and filter way.        
+    -   name:   Test Days
+        data:
+            url:    https://testdays.fedoraproject.org/events                
     -   name:   Blocker Bugs
         data:
             url:    https://qa.fedoraproject.org/blockerbugs
@@ -244,6 +272,23 @@ children:
             Tools for people -- so we can talk to each other and share content
             and ideas.
     children:
+    -   name:   Chat | Matrix
+        data:
+            url:    https://chat.fedoraproject.org
+            description: >
+                Access fedora.im for real time communication.
+    -   name:   Project Schedule
+        data:
+            url:    http://fedorapeople.org/groups/schedule/
+            description: >
+                Routine schedules, as approved by the Fedora Engineering Steering 
+                Committee, target releases for late April and late October.
+    -   name:   Fedora Discussion
+        data:
+            url:    https://discussion.fedoraproject.org/
+            description: >
+                Project coordination and disucssion.
+
     -   name:   Asknot
         data:
             url:    https://whatcanidoforfedora.org
@@ -278,6 +323,7 @@ children:
                 influence the development of Fedora.
     -   name:   Nuancier
         data:
+            legacyApp: true
             icon:   nuancier.png
             url: https://apps.fedoraproject.org/nuancier
             source_url: https://github.com/fedora-infra/nuancier
@@ -288,7 +334,7 @@ children:
             description: >
                 Nuancier is a simple voting application for the
                 supplementary wallpapers included in Fedora.
-    -   name:   The Mailing lists
+    -   name:   Mailing Lists
         data:
             icon:   hyperkitty.png
             url:    https://lists.fedoraproject.org
@@ -340,8 +386,22 @@ children:
         description: >
             Tools for packagers -- where the pieces of the distribution get
             built.
-
     children:
+        -   name:   Product Definition Center
+            data:
+                url:    https://pdc.fedoraproject.org/
+                source_url: https://github.com/product-definition-center/product-definition-center
+                bugs_url:   https://github.com/product-definition-center/product-definition-center/issues
+                # Also, https://fedoraproject.org/wiki/Changes/PDC
+                docs_url:   https://github.com/product-definition-center/product-definition-center/issues/303
+                sops:
+                - https://infrastructure.fedoraproject.org/infra/docs/pdc.rst
+                description: >
+                    The Product Definition Center (PDC) is a new app we're working
+                    on which will track 1) all of the artifacts that release
+                    engineering *should* be producing and 2) all of the artifacts
+                    taht release engineering *did* produce.  The web interface isn't
+                    much to write home about, but the API is where it's at.
         -   name:   Packages
             data:
                 url:    https://packages.fedoraproject.org/
@@ -428,6 +488,9 @@ children:
                     of a Fedora package?  This is where the change histories
                     of all the packages in Fedora for every release of
                     Fedora (and EPEL) are kept.. forever!  A gold mine.
+        -   name:   Container Registry
+            data:
+                url:    https://registry.fedoraproject.org
         -   name:   Mdapi
             data:
                 url: https://apps.fedoraproject.org/mdapi
@@ -626,36 +689,3 @@ children:
             description: >
                 Shows the health of our proxies.  How many bytes?
                 Concurrent sessions?  Health checks?
--   name:   In Development
-    slug:   InDevelopment
-    data:
-        description: >
-            These are the apps that we're working on, but that aren't quite
-            ready for prime-time yet.  Try and use them, and report bugs when
-            they're broken -- it's a big help!.
-            Check back here from time to time, as this section will change.
-    children:
-    -   name:   Product Definition Center
-        data:
-            url:    https://pdc.fedoraproject.org/
-            source_url: https://github.com/product-definition-center/product-definition-center
-            bugs_url:   https://github.com/product-definition-center/product-definition-center/issues
-            # Also, https://fedoraproject.org/wiki/Changes/PDC
-            docs_url:   https://github.com/product-definition-center/product-definition-center/issues/303
-            sops:
-            - https://infrastructure.fedoraproject.org/infra/docs/pdc.rst
-            description: >
-                The Product Definition Center (PDC) is a new app we're working
-                on which will track 1) all of the artifacts that release
-                engineering *should* be producing and 2) all of the artifacts
-                taht release engineering *did* produce.  The web interface isn't
-                much to write home about, but the API is where it's at.
-    -   name:   Ipsilon
-        data:
-            url: https://pagure.io/ipsilon
-            description:
-                 Ipsilon is our central authentication agent that is used to
-                 authenticate users agains FAS. It is seperate from FAS. The
-                 only service that is not using this currently is the wiki.
-                 It is a web service that is presented via httpd and is load
-                 balanced by our standard haproxy setup.

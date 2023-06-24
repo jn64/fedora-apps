@@ -74,13 +74,16 @@ function generateTiles(apps) {
             const appDescription = stripHtmlTags(child.data.description);
             const appTitle = child.name;
             const appUrl = child.data.url;
+            const isLegacy = child.data.legacyApp
+                ? 'legacy-app'
+                : '';
             const appIcon = child.data.icon
                 ? `theme/icons/${child.data.icon}`
                 : `theme/icons/none.png`;
 
             html += `    
             <div id="apptile" class="cat-${slug} col-md-2 col-4 my-3 px-2 text-center" title="${appDescription}">\n
-            <a target="_blank" href="${appUrl}"><img src="${appIcon}" class="img-thumbnail" alt="Logo for ${appTitle}"></a><br/>\n
+            <a target="_blank" class="${isLegacy}" href="${appUrl}"><img src="${appIcon}" class="img-thumbnail" alt="Logo for ${appTitle}"></a><br/>\n
             <a target="_blank" href="${appUrl}">${appTitle}</a>\n
             <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .5rem;"  data-bs-toggle="modal" data-bs-target="#app-${a}">?</button>\n
             </div>\n
