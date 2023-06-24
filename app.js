@@ -80,11 +80,9 @@ function generateTiles(apps) {
 
             html += `    
             <div id="apptile" class="cat-${slug} col-md-2 col-4 my-3 px-2 text-center" title="${appDescription}">\n
-                <a target="_blank" href="${appUrl}">\n
-                    <img src="${appIcon}" class="img-thumbnail" alt="Logo for ${appTitle}"><br/>\n
-                    ${appTitle}\n
-                </a><br/>\n
-                <button type="button" class="btn btn-secondary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"  data-bs-toggle="modal" data-bs-target="#app-${a}">?</button>\n
+            <a target="_blank" href="${appUrl}"><img src="${appIcon}" class="img-thumbnail" alt="Logo for ${appTitle}"></a><br/>\n
+            <a target="_blank" href="${appUrl}">${appTitle}</a>\n
+            <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .5rem;"  data-bs-toggle="modal" data-bs-target="#app-${a}">?</button>\n
             </div>\n
             `;
         
@@ -107,39 +105,28 @@ function buildPills(apps) {
     return html;
 }
 
-
 function filterPills() {
 
-    // Retrieve necessary elements from the DOM
     const pills = document.querySelectorAll('#filter-container .nav-link');
     const divList = document.getElementById('apps');
 
-    // Attach click event listener to each pill
     pills.forEach(pill => {
-    pill.addEventListener('click', function() {
-        const filter = this.getAttribute('data-filter'); // Get the filter category
-
-        // Remove 'active' class from all pills
-        pills.forEach(p => p.classList.remove('active'));
-
-        // Add 'active' class to the clicked pill
-        this.classList.add('active');
-
-        // Filter the div list based on the selected category
-        if (filter === 'all') {
-        // Show all divs if 'All' is selected
-        divList.querySelectorAll('#apptile').forEach(div => div.style.display = 'block');
-        } else {
-        // Show only divs that match the selected category
-        divList.querySelectorAll('#apptile').forEach(div => {
-            if (div.classList.contains(filter)) {
-            div.style.display = 'block'; // Display matching divs
+        pill.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            pills.forEach(p => p.classList.remove('active'));
+            this.classList.add('active');
+            if (filter === 'all') {
+                divList.querySelectorAll('#apptile').forEach(div => div.style.display = 'block');
             } else {
-            div.style.display = 'none'; // Hide non-matching divs
+                divList.querySelectorAll('#apptile').forEach(div => {
+                    if (div.classList.contains(filter)) {
+                        div.style.display = 'block'; 
+                    } else {
+                        div.style.display = 'none';
+                    }
+                });
             }
         });
-        }
-    });
     });
 
 }
